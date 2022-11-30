@@ -24,7 +24,7 @@ class BeautySalon(models.Model):
         verbose_name_plural = _("Beauty salons")
 
     def __str__(self) -> str:
-        return f"{self.name}, {self.address}"
+        return f"{self.salon_name}, {self.address}"
 
 
 class Service(models.Model):
@@ -60,7 +60,7 @@ class SalonService(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.beauty_salon} {self.service}"
+        return f"{self.beauty_salon}: {self.service}"
 
 
 class Customer(models.Model):
@@ -77,7 +77,7 @@ class Customer(models.Model):
         verbose_name_plural = _("Customers")
 
     def __str__(self) -> str:
-        return f"{self.user} {self.phone}"
+        return f"{self.user.first_name} {self.user.last_name}, {self.user.email}, {self.phone}"
 
 
 class Order(models.Model):
