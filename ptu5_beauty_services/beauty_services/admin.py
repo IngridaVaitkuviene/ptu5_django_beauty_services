@@ -19,6 +19,7 @@ class SalonServiceAdmin(admin.ModelAdmin):
 
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('service_name', 'price', 'service_type')
+    list_filter = ('service_type',)
     search_fields = ('service_name', 'price',)
 
 
