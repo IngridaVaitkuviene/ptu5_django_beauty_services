@@ -22,6 +22,7 @@ class BeautySalon(models.Model):
     class Meta:
         verbose_name = _("Beauty salon")
         verbose_name_plural = _("Beauty salons")
+        ordering = ('salon_name',)
 
     def __str__(self) -> str:
         return f"{self.salon_name}, {self.address}"
