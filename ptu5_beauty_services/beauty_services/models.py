@@ -15,8 +15,8 @@ class ServiceType(models.Model):
 
 
 class BeautySalon(models.Model):
-    salon_name = models.CharField(_("name"), max_length=150)
-    address = models.CharField(_("address"), max_length=150)
+    salon_name = models.CharField(_("name"), max_length=100)
+    address = models.CharField(_("address"), max_length=100)
     image = models.ImageField(_("image"), upload_to='images', blank=True, null=True)
 
     class Meta:
@@ -35,12 +35,13 @@ class Service(models.Model):
         on_delete=models.CASCADE, 
         related_name='services',
     )
-    service_name = models.CharField(_("name"), max_length=200)
+    service_name = models.CharField(_("name"), max_length=100)
     price = models.DecimalField(_("price"), max_digits=5, decimal_places=2)
 
     class Meta:
         verbose_name = _('Service')
         verbose_name_plural = _('Services')
+        ordering = ('service_name',)
 
     def __str__(self) -> str:
         return f"{self.service_name} - {self.price}"
@@ -76,10 +77,11 @@ class Customer(models.Model):
     class Meta:
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
+        ordering = ('user',)
 
     def __str__(self) -> str:
-        return f"{self.user.first_name} {self.user.last_name}, {self.user.email}, {self.phone}"
-
+        return f"{self.user.first_name} {self.user.last_name}, {self.phone}, {self.user.email}"
+    
 
 class Order(models.Model):
     STATUS_CHOICES = (
@@ -121,8 +123,8 @@ class OrderLine(models.Model):
         on_delete=models.CASCADE,
         related_name='order_lines',
     )
-    quantity = models.IntegerField(_("quantity")),
     price = models.DecimalField(_("price"), max_digits=5, decimal_places=2)
+    quantity = models.IntegerField(_("quantity"), default=1)
 
     class Meta:
         verbose_name = _('Order line')
