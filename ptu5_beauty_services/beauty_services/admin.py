@@ -35,11 +35,34 @@ class CustomerAdmin(admin.ModelAdmin):
     def get_email(self, obj):
         return f"{obj.user.email}"
 
+
+class OrderLineInLine(admin.TabularInline):
+    model = models.OrderLine
+    extra = 0
+    can_delete = False
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('date', 'customer', 'total_sum', 'reserved_date', 'status',)
+    list_filter = ('date', 'status',)
+    list_editable = ('status', 'reserved_date')
+    readonly_fields = ('date',)
+    inlines = (OrderLineInLine, )
+    
+    fieldsets = (
+        ('General', {'fields': ('date', 'customer',)}),
+        ('Reservation', {'fields': ('reserved_date','status', 'total_sum', )}),
+    )
+
+
+class OrderLineAdmin(admin.ModelAdmin):
+    list_display = ('salon_service', 'quantity', 'price', 'total_sum', 'order',)
+
     
 admin.site.register(models.ServiceType)
 admin.site.register(models.BeautySalon, BeautySalonAdmin)
 admin.site.register(models.Service, ServiceAdmin)
 admin.site.register(models.SalonService, SalonServiceAdmin)
 admin.site.register(models.Customer, CustomerAdmin)
-admin.site.register(models.Order)
-admin.site.register(models.OrderLine)
+admin.site.register(models.Order, OrderAdmin)
+admin.site.register(models.OrderLine, OrderLineAdmin)
