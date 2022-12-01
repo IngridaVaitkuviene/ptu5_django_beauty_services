@@ -106,6 +106,17 @@ class Order(models.Model):
         verbose_name = _('Order')
         verbose_name_plural = _('Orders')
 
+    def get_total(self):
+        total = 0
+        for line in self.order_lines.all():
+            total += line.total_sum
+        return total
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            self.total_sum = self.get_total()
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"{self.date} {self.total_sum} {self.customer}"
 
@@ -129,6 +140,10 @@ class OrderLine(models.Model):
     class Meta:
         verbose_name = _('Order line')
         verbose_name_plural = _('Order lines')
+
+    @property
+    def total_sum(self):
+        return self.quantity * self.price
 
     def __str__(self) -> str:
         return f"{self.salon_service}: {self.quantity} x {self.price}"
