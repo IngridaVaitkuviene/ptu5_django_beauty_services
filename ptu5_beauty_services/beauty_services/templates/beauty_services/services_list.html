@@ -7,4 +7,15 @@
         <li>{{ service.service_type }}: {{ service.service_name }} - {{ service.price }}</li>
        {% endfor %}
     </ul>
+<div class="paginator">
+    {% if page_obj.has_previous %}
+        <a href="?page=1">&#171;</a>
+        <a href="?page={{ page_obj.previous_page_number }}">&#8249;</a>
+    {% endif %}
+    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">&#8250;</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">&#187;</a>
+    {% endif %}
+</div>    
 {% endblock content %}

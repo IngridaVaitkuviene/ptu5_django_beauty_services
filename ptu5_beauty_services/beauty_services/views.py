@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'beauty_services/index.html', context)
 
 def salons(request):
-    paginator = Paginator(BeautySalon.objects.all(), 15)
+    paginator = Paginator(BeautySalon.objects.all(), 3)
     page_number = request.GET.get('page')
     paged_salons = paginator.get_page(page_number)
     return render(request, 'beauty_services/salons.html', {'salons': paged_salons})

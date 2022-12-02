@@ -1,10 +1,31 @@
 {% extends 'beauty_services/base.html' %}
+{% load static %}
 {% block title %}Beauty Salons in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Beauty Salons</h1>
-    <ul>
-        {% for salon in salons %}
-        <li><a href="{% url 'salon' salon.id %}">{{ salon }}</a></li>
+<div class="paginator">
+    {% if salons.has_other_pages %}
+        {% for page_number in salons.paginator.page_range %}
+            {% if page_number == salons.number %}
+                <span>{{ page_number }}</span>
+            {% else %}
+                <a href="?page={{ page_number }}">{{ page_number}}</a>
+            {% endif %}
         {% endfor %}
-    </ul>
+    {% endif %}
+</div>    
+<ul>
+    {% for salon in salons %}
+    <li class="salon">
+        <a href="{% url 'salon' salon.id %}">
+            {% if salon.image %}
+                <img src="{{ salon.image.url }}">
+            {% else %}
+                <img src="{% static 'beauty_services/images/no_image.png' %}" style=>
+            {% endif %}
+            {{ salon.salon_name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock content %}
