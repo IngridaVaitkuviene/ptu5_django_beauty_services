@@ -61,6 +61,9 @@ class SalonService(models.Model):
         related_name='salons_services',
     )
 
+    class Meta:
+        ordering = ('service',)
+
     def __str__(self) -> str:
         return f"{self.beauty_salon}: {self.service}"
 
