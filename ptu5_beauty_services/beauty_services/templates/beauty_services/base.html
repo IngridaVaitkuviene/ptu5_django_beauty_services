@@ -10,12 +10,16 @@
 </head>
 <body>
     <header>
+        <h1>Beauty services</h1>
         <div class="container">
             {% block nav %}
             <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'salons' %}">Salons</a>
+            <a href="{% url 'services' %}">Services</a>
             <a href="{% url 'admin:index' %}">Admin</a>
             {% endblock nav %}
         </div>
+        
     </header>
     <main>
         <div class="container">
