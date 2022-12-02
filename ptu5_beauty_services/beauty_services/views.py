@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from . models import ServiceType, BeautySalon
 
 def index(request):
-    return HttpResponse('Starting a new project "Beauty services reservation platform"')
+    types =  ServiceType.objects.all()
+    context = {'service_type': " | ".join(str(t) for t in types)}
+    return render(request, 'beauty_services/index.html', context)
