@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from tinymce.models import HTMLField
 
 User = get_user_model()
 
@@ -18,6 +19,7 @@ class BeautySalon(models.Model):
     salon_name = models.CharField(_("name"), max_length=100)
     address = models.CharField(_("address"), max_length=100)
     image = models.ImageField(_("image"), upload_to='images', blank=True, null=True)
+    description = HTMLField(_("description"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("Beauty salon")
@@ -41,7 +43,7 @@ class Service(models.Model):
     class Meta:
         verbose_name = _('Service')
         verbose_name_plural = _('Services')
-        ordering = ('service_name',)
+        ordering = ('service_type', 'service_name',)
 
     def __str__(self) -> str:
         return f"{self.service_name} - {self.price}"
