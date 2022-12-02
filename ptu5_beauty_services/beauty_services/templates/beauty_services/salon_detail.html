@@ -1,0 +1,8 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}{{ object }} in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>{{ object.salon_name }}</h>
+    {% if object.address %}
+    <p>Address: {{ object.address }}</p>
+    {% endif %}
+{% endblock content %}

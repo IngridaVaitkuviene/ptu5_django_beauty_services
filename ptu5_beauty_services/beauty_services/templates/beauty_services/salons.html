@@ -1,0 +1,10 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}Beauty Salons in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Beauty Salons</h1>
+    <ul>
+        {% for salon in salons %}
+        <li><a href="{% url 'salon' salon.id %}">{{ salon }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
