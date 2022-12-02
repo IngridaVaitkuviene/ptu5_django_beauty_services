@@ -1,3 +1,40 @@
 body {
-    background-color: whitesmoke;
+    background-color: #abde8c;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+header, main, footer {
+    min-width: fit-content;
+}
+
+header a {
+    display: inline-block;
+    padding: 0.5rem;
+    text-decoration: none;
+}
+
+main {
+    flex-grow: 1;
+    background-image: url('/static/index_body.webp');
+    background-size: cover;
+    place-items: stretch center;
+}
+
+h1 {
+    margin: 0.5rem;
+}
+
+footer {
+    margin: 0.5rem;
+}
+
+ul, li {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: medium;
 }
