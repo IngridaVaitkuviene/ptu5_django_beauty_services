@@ -73,6 +73,10 @@ form input {
     margin: 0.5rem;
 }
 
+.form-error {
+    color: #900;
+}
+
 h1 {
     margin: 0.5rem;
 }
@@ -128,6 +132,14 @@ table {
     margin: 0.5rem;
 }
 
-.form-error {
+.alert {
+    padding: 0.5rem;
+}
+
+.alert-error {
     color: #900;
+}
+
+.alert-success {
+    color: #070;
 }
