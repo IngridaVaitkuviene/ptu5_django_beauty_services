@@ -16,10 +16,18 @@
             <a href="{% url 'index' %}">Home</a>
             <a href="{% url 'salons' %}">Salons</a>
             <a href="{% url 'services' %}">Services</a>
-            <a href="{% url 'admin:index' %}">Admin</a>
+                <span class="spacer"></span>
+                {% if user.is_authenticated %}
+                    <span>{{ user }}</span>
+                    {% if user.is_superuser or user.is_staff %}
+                        <a href="{% url 'admin:index' %}">Admin</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                {% endif %}
             {% endblock nav %}
         </div>
-        
     </header>
     <main>
         <div class="container">

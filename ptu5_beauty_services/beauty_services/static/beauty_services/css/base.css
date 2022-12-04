@@ -12,6 +12,25 @@ header, main, footer {
     min-width: fit-content;
 }
 
+header h1 {
+    color: #fff;
+}
+
+header .container {
+    display: flex;
+    flex-direction: row;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+header .container span {
+    align-self: center;
+    color: #fff;
+    padding: 0.5rem;
+}
+
 header a {
     display: inline-block;
     padding: 0.5rem;
