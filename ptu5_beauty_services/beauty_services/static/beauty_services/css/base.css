@@ -74,3 +74,11 @@ ul p {
 .paginator form {
     display: inline-block;
 }
+
+table {
+    margin: 0.5rem;
+}
+
+.form-error {
+    color: #900;
+}
