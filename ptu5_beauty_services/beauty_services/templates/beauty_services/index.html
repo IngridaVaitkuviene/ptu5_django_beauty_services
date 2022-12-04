@@ -1,6 +1,7 @@
 {% extends 'beauty_services/base.html' %}
 {% block title %}Book Salon Appoitments Online - {{ block.super }}{% endblock title %}
 {% block content %}
-<ul><a href="{% url 'salons' %}">Beauty salons ({{ salon_count }})</a></ul>
-<ul><a href=" {% url 'services' %}">Services ({{ service_count }})</a></ul>
+<ul><a href="{% url 'salons' %}">Beauty salons:</a> {{ salon_count }}</ul>
+<ul><a href=" {% url 'services' %}">Services:</a> {{ service_count }}</ul>
+<ul>Visits in this session: {{ visits_count }}</ul>
 {% endblock content %}

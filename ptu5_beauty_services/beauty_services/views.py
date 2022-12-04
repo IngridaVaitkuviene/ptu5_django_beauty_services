@@ -8,10 +8,14 @@ def index(request):
     types =  ServiceType.objects.all()
     salon_count = BeautySalon.objects.count()
     service_count = Service.objects.count()
+    visits_count = request.session.get('visits_count', 1)
+    request.session['visits_count'] = visits_count + 1
+
     context = {
         'service_type': " | ".join(str(t) for t in types),
         'salon_count': salon_count,
         'service_count': service_count,
+        'visits_count': visits_count,
     }
     return render(request, 'beauty_services/index.html', context)
 

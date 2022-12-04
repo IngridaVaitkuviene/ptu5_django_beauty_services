@@ -21,7 +21,7 @@ header a {
 main {
     flex-grow: 1;
     background-image: url('/static/index_body.webp');
-    background-size: 2000px;
+    background-size: cover;
 }
 
 h1 {
