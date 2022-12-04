@@ -41,6 +41,36 @@ main {
     flex-grow: 1;
     background-image: url('/static/index_body.webp');
     background-size: cover;
+    background-position: center;
+}
+
+main p {
+    margin: 0;
+}
+
+form p {
+    margin: 0;
+}
+
+form button {
+    margin: 0.5rem;
+}
+
+form label {
+    margin: 0.5rem;
+}
+
+form p label {
+    margin: 0;
+}
+
+form li {
+    padding: 0;
+    margin: 1rem;
+}
+
+form input {
+    margin: 0.5rem;
 }
 
 h1 {
