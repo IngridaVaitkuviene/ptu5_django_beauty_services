@@ -77,6 +77,11 @@ form input {
     color: #900;
 }
 
+.form-grid {
+    margin: 0.5rem;
+    grid-template-columns: 10rem auto;
+}
+
 h1 {
     margin: 0.5rem;
 }
@@ -154,4 +159,17 @@ table {
 .flex-profile {
     display: flex;
     place-items: stretch stretch;
+}
+
+.button {
+    background-color: #ccc;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #999;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+.button:hover {
+    background-color: #ddd;
 }
