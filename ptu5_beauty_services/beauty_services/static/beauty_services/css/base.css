@@ -96,6 +96,7 @@ footer {
 }
 
 ul, li, p {
+    margin: 0;
     padding: 0.5rem;
     font-size: medium;
 }
@@ -167,4 +168,21 @@ table {
 
 .button:hover {
     background-color: #ddd;
+}
+
+.service_type_filter {
+    float: right;
+    background-color: #e7d7eb;
+}
+
+.service_type_filter li {
+    list-style: none;
+}
+
+.service_type_filter li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.service_type_filter .current {
+    background-color: rgba(255, 255, 255, 0.4);
 }

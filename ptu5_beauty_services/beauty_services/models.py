@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from tinymce.models import HTMLField
 
@@ -13,6 +15,10 @@ class ServiceType(models.Model):
 
     def __str__(self) -> str:
         return self.type_name
+
+    def link_filtered_services(self):
+        link = reverse('services')+'?service_type_id='+str(self.id)
+        return format_html('<a href="{link}">{name}</a>', link=link, name=self.type_name)
 
 
 class BeautySalon(models.Model):

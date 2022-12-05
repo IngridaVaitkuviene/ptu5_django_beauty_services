@@ -36,6 +36,22 @@ class ServiceListView(ListView):
     paginate_by = 15
     template_name = 'beauty_services/services_list.html'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        service_type_id = self.request.GET.get('service_type_id')
+        if service_type_id:
+            queryset = queryset.filter(service_type__id=service_type_id)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        service_type_id = self.request.GET.get('service_type_id')
+        context['service_types'] = ServiceType.objects.all
+        if service_type_id:
+            context['service_type'] = get_object_or_404(ServiceType, id=service_type_id)
+        return context
+
+
 
 class UserOrderListView(LoginRequiredMixin, ListView):
     model = OrderLine

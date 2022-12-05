@@ -2,6 +2,14 @@
 {% block title %}Services in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Services </h>
+<div class="service_type_filter">    
+    <h5>Service types: <h5>
+        <ul>
+            {% for filter_service_type in service_types %}
+                <li class="{% if filter_service_type == service_type %}current{% endif %}">{{ filter_service_type.link_filtered_services }}</li>
+            {% endfor %}
+        </ul>
+</div>
     <ul>
        {% for service in service_list %}
         <li>{{ service.service_type }}: {{ service.service_name }} - {{ service.price }}</li>
