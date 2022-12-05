@@ -1,18 +1,14 @@
 {% extends 'beauty_services/base.html' %}
 {% load static %}
-{% block title %}{{ object }} in {{ block.super }}{% endblock title %}
+{% block title %}{{ object.salon_name }} in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>{{ object.salon_name }}</h>
 <ul>
-    <li class="salon">
-        <a href="{% url 'salon' object.id %}">
-            {% if object.image %}
-                <img src="{{ object.image.url }}">
-            {% else %}
-                <img src="{% static 'beauty_services/images/no_image.png' %}">
-            {% endif %}
-        </a>
-    </li>
+    {% if object.image %}
+        <img src="{{ object.image.url }}" style='width: 20rem'>
+    {% else %}
+        <img src="{% static 'beauty_services/images/no_image.png' %}" style='width: 20rem'>
+    {% endif %}
 </ul>
 <ul>
     {% if object.address %}

@@ -1,7 +1,7 @@
 {% extends 'beauty_services/base.html' %}
 {% block title %}Services in {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>Services</h>
+<h1>Services </h>
     <ul>
        {% for service in service_list %}
         <li>{{ service.service_type }}: {{ service.service_name }} - {{ service.price }}</li>
