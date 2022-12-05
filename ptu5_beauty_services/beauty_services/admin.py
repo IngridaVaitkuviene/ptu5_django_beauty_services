@@ -47,6 +47,13 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('date', 'status',)
     list_editable = ('status', 'reserved_date')
     readonly_fields = ('date',)
+    search_fields = (
+        'date', 
+        'customer__phone', 'customer__user__first_name', 'customer__user__last_name',
+        'total_sum', 
+        'reserved_date', 
+        'status',
+    ) 
     inlines = (OrderLineInLine, )
     
     fieldsets = (
@@ -57,6 +64,13 @@ class OrderAdmin(admin.ModelAdmin):
 
 class OrderLineAdmin(admin.ModelAdmin):
     list_display = ('salon_service', 'quantity', 'price', 'total_sum', 'order',)
+    search_fields = (
+        'order__date',
+        'order__customer__user__first_name',
+        'order__customer__user__last_name',
+        'salon_service__beauty_salon__salon_name', 
+        'salon_service__service__service_name',
+    )
 
     
 admin.site.register(models.ServiceType)
