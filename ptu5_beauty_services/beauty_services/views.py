@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
@@ -25,6 +26,11 @@ def salons(request):
     paged_salons = paginator.get_page(page_number)
     return render(request, 'beauty_services/salons.html', {'salons': paged_salons})
 
+def get_queryset(self):
+    queryset = get_queryset(BeautySalon.objects.all())
+    search = self.request.GET.get('search')
+    if search:
+        queryset = queryset.filter(Q(salon_name__icontains=search)| Q(address__icontains=search))
 
 class SalonDetailView(DetailView):
     model = BeautySalon
@@ -38,6 +44,9 @@ class ServiceListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        search = self.request.GET.get('search')
+        if search:
+            queryset = queryset.filter(Q(service_name__icontains=search)| Q(service_type__type_name__icontains=search))
         service_type_id = self.request.GET.get('service_type_id')
         if service_type_id:
             queryset = queryset.filter(service_type__id=service_type_id)

@@ -3,6 +3,10 @@
 {% block title %}Beauty Salons in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Beauty Salons</h1>
+<form action="{% url 'salons' %}" method="get">
+    <input type="text" name="search" value="{{ request.GET.search }}">
+    <button type="submit">search</button>
+</form>
 <div class="paginator">
     {% if salons.has_other_pages %}
         {% for page_number in salons.paginator.page_range %}
@@ -13,7 +17,7 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-</div>    
+</div>
 <ul>
     {% for salon in salons %}
     <li class="salon">
