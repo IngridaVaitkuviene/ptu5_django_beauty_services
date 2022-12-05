@@ -143,3 +143,15 @@ table {
 .alert-success {
     color: #070;
 }
+
+.user-profile-photo {
+    max-width: 15rem;
+    float: left;
+    border-radius: 60%;
+    padding: 0.5rem;
+}
+
+.flex-profile {
+    display: flex;
+    place-items: stretch stretch;
+}
