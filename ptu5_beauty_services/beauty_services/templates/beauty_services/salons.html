@@ -20,16 +20,16 @@
 </div>
 <ul>
     {% for salon in salons %}
-    <li class="salon">
-        <a href="{% url 'salon' salon.pk %}">
-            {% if salon.image %}
-                <img src="{{ salon.image.url }}" style='width: 15rem'>
-            {% else %}
-                <img src="{% static 'beauty_services/images/no_image.png' %}" style='width: 15rem'>
-            {% endif %}
-            {{ salon.salon_name }}
-        </a>
-    </li>
+        <li class="salon">
+            <a href="{% url 'salon' salon.pk %}">
+                {% if salon.image %}
+                    <img src="{{ salon.image.url }}" style='width: 15rem'>
+                {% else %}
+                    <img src="{% static 'beauty_services/images/no_image.png' %}" style='width: 15rem'>
+                {% endif %}
+                {{ salon.salon_name }}
+            </a>
+        </li>
     {% endfor %}
 </ul>
 {% endblock content %}

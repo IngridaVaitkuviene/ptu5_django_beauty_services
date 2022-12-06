@@ -45,7 +45,7 @@ class OrderLineInLine(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('date', 'customer', 'total_sum', 'reserved_date', 'status',)
     list_filter = ('date', 'status',)
-    list_editable = ('status', 'reserved_date')
+    list_editable = ('status', 'reserved_date', 'customer',)
     readonly_fields = ('date',)
     search_fields = (
         'date', 

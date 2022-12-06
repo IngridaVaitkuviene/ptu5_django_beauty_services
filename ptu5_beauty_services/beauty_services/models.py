@@ -88,7 +88,7 @@ class Customer(models.Model):
     class Meta:
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
-        ordering = ('user',)
+        ordering = ('user__first_name',)
 
     def __str__(self) -> str:
         return f"{self.user.first_name} {self.user.last_name}, {self.phone}, {self.user.email}"
@@ -129,7 +129,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"{self.date} {self.total_sum} {self.customer}"
+        return f"{self.date} {self.total_sum} {self.customer.user.first_name} {self.customer.user.last_name}"
 
 
 class OrderLine(models.Model):
