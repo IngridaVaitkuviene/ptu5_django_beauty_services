@@ -63,7 +63,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class OrderLineAdmin(admin.ModelAdmin):
-    list_display = ('salon_service', 'quantity', 'price', 'total_sum', 'order',)
+    list_display = ('order', 'salon_service', 'quantity', 'price', 'total_sum',)
     search_fields = (
         'order__date',
         'order__customer__user__first_name',
