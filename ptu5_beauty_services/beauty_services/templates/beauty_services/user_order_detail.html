@@ -1,0 +1,22 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}My order {{ object }} details in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Order details</h1>
+{% if object.order_lines.count > 0 %}
+    <p>Salon: {{ object.order_lines.first.salon_service.beauty_salon.salon_name }},
+    Address: {{ object.order_lines.first.salon_service.beauty_salon.address }}
+    </p>
+
+{% endif %}
+<div class='table-grid my-order-details-table'>
+    <div class='table-grid-cell center dark'>Service</div>
+    <div class='table-grid-cell center dark'>Quantity</div>
+    <div class='table-grid-cell center dark'>Price</div>
+    {% for order_line in object.order_lines.all %}
+    <div class='table-grid-cell'>{{ order_line.salon_service.service.service_name }}</div>
+    <div class='table-grid-cell center'>{{ order_line.quantity }}</div>
+    <div class='table-grid-cell center'>{{ order_line.price }}</div>
+    {% endfor %}
+</div>
+<button class='back-button'><a href="{% url 'user_orders' %}">Back</a></button>
+{% endblock content %}

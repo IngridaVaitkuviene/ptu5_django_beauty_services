@@ -182,3 +182,35 @@ table {
 .service_type_filter .current {
     background-color: rgba(255, 255, 255, 0.4);
 }
+
+.table-grid {
+    display: grid;
+    padding: 0.5rem;
+    width: 70rem;
+}
+
+.my-orders-table {
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+}
+
+.my-order-details-table {
+    grid-template-columns: 0.6fr 0.1fr 0.2fr;
+}
+
+.table-grid-cell {
+    border-bottom: 1px solid #999;
+    padding: 0.5rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.dark {
+    font-weight: bolder;
+}
+
+.back-button {
+    margin: 0.5rem;
+    width: 3rem;
+}

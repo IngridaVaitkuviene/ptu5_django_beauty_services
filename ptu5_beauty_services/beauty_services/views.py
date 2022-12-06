@@ -21,7 +21,11 @@ def index(request):
     return render(request, 'beauty_services/index.html', context)
 
 def salons(request):
-    paginator = Paginator(BeautySalon.objects.all(), 3)
+    salons = BeautySalon.objects.all()
+    search = request.GET.get('search')
+    if search:
+        salons = salons.filter(salon_name__icontains=search)
+    paginator = Paginator(salons, 3)
     page_number = request.GET.get('page')
     paged_salons = paginator.get_page(page_number)
     return render(request, 'beauty_services/salons.html', {'salons': paged_salons})
@@ -66,14 +70,7 @@ class UserOrderListView(LoginRequiredMixin, ListView):
         queryset = queryset.filter(customer__user=self.request.user)
         return queryset
 
-
-class UserOrderLineListView(LoginRequiredMixin, ListView):
-    model = OrderLine
-    template_name = 'beauty_services/user_order_line_list.html'
+class UserOrderDetailView(LoginRequiredMixin, DetailView):
+    model = Order
+    template_name = 'beauty_services/user_order_detail.html'
     # paginate_by = 10
-
-    def get_queryset(self):
-        queryset =  super().get_queryset()
-        queryset = queryset.filter(order__customer__user=self.request.user)
-        return queryset
-

@@ -21,13 +21,13 @@
     </ul>
 <div class="paginator">
     {% if page_obj.has_previous %}
-        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page=1">&#171;</a>
-        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.previous_page_number }}">&#8249;</a>
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.service_type_id %}service_type_id={{request.GET.service_type_id}}&{% endif %}page=1">&#171;</a>
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.service_type_id %}service_type_id={{request.GET.service_type_id}}&{% endif %}page={{ page_obj.previous_page_number }}">&#8249;</a>
     {% endif %}
     {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
     {% if page_obj.has_next %}
-        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.next_page_number }}">&#8250;</a>
-        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.paginator.num_pages }}">&#187;</a>
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.service_type_id %}service_type_id={{request.GET.service_type_id}}&{% endif %}page={{ page_obj.next_page_number }}">&#8250;</a>
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.service_type_id %}service_type_id={{request.GET.service_type_id}}&{% endif %}page={{ page_obj.paginator.num_pages }}">&#187;</a>
     {% endif %}
 </div>    
 {% endblock content %}
