@@ -1,0 +1,11 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}My Order in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Orders detail</h1>
+<button><a href="{% url 'user_orders' %}">Back</a></button>
+<div class='table-grid'>
+    {% for order_line in orderline_list %}
+        <div>{{ order_line }}</div>
+    {% endfor %}
+</div>
+{% endblock content %}

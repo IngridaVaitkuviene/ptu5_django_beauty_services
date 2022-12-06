@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from . models import ServiceType, BeautySalon, Service, OrderLine
+from . models import ServiceType, BeautySalon, Service, Order, OrderLine
 
 def index(request):
     types =  ServiceType.objects.all()
@@ -26,11 +26,6 @@ def salons(request):
     paged_salons = paginator.get_page(page_number)
     return render(request, 'beauty_services/salons.html', {'salons': paged_salons})
 
-def get_queryset(self):
-    queryset = get_queryset(BeautySalon.objects.all())
-    search = self.request.GET.get('search')
-    if search:
-        queryset = queryset.filter(Q(salon_name__icontains=search)| Q(address__icontains=search))
 
 class SalonDetailView(DetailView):
     model = BeautySalon
@@ -61,14 +56,24 @@ class ServiceListView(ListView):
         return context
 
 
-
 class UserOrderListView(LoginRequiredMixin, ListView):
-    model = OrderLine
+    model = Order
     template_name = 'beauty_services/user_order_list.html'
-    paginate_by = 10
+    # paginate_by = 10
 
-    # def get_queryset(self):
-    #     queryset =  super().get_queryset()
-    #     queryset = queryset.filter(customer=self.request.user)
-    #     return queryset
+    def get_queryset(self):
+        queryset =  super().get_queryset()
+        queryset = queryset.filter(customer__user=self.request.user)
+        return queryset
+
+
+class UserOrderLineListView(LoginRequiredMixin, ListView):
+    model = OrderLine
+    template_name = 'beauty_services/user_order_line_list.html'
+    # paginate_by = 10
+
+    def get_queryset(self):
+        queryset =  super().get_queryset()
+        queryset = queryset.filter(order__customer__user=self.request.user)
+        return queryset
 

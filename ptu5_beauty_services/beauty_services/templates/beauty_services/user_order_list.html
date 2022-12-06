@@ -2,5 +2,10 @@
 {% block title %}My Orders in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>My Orders</h1>
-
+<button><a href="{% url 'user_order' %}">Orders details</a></button>
+<div class='table-grid'>
+    {% for order in order_list %}
+        <div>{{ order }}</div>
+    {% endfor %}
+</div>
 {% endblock content %}
