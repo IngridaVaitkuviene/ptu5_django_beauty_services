@@ -14,7 +14,7 @@ class BeautySalonAdmin(admin.ModelAdmin):
 
 class SalonServiceAdmin(admin.ModelAdmin):
     list_display = ('beauty_salon', 'service',)
-    search_fields = ('beauty_salon', 'service',)
+    search_fields = ('beauty_salon__salon_name', 'service__service_name',)
 
 
 class ServiceAdmin(admin.ModelAdmin):
