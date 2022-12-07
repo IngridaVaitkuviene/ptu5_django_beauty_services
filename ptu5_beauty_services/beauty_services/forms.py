@@ -11,3 +11,10 @@ class UserOrderForm(forms.ModelForm):
         model = Order
         fields = ('customer', 'reserved_date',)
         widgets = {'reserved_date': DateInput()}
+
+
+class UserOrderUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('customer', 'reserved_date',)
+        widgets = {'customer': forms.HiddenInput(), 'reserved_date': forms.HiddenInput(), }

@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from . models import ServiceType, BeautySalon, Service, Order, OrderLine
-from . forms import UserOrderForm
+from . forms import UserOrderForm, UserOrderUpdateForm
 
 def index(request):
     types =  ServiceType.objects.all()
@@ -115,7 +115,7 @@ class UserOrderCreateView(LoginRequiredMixin, CreateView):
 
 class UserOrderUpdateView(LoginRequiredMixin, UpdateView):
     model = Order
-    form_class = UserOrderForm
+    form_class = UserOrderUpdateForm
     template_name = 'beauty_services/user_order_form.html'
     success_url = reverse_lazy('user_orders')
 
@@ -127,12 +127,19 @@ class UserOrderUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.customer.user = self.request.user
         form.instance.status = 'a'
-        messages.success(self.request, "Order updated/Paid in advance.")
+        messages.success(self.request, "Order updated/Paid in advance")
+        form.instance.status = 'c'
+        messages.success(self.request, "Order canceled")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['updating'] = True
+        context['order'] = self.get_object()
+        if context['order'].status == 'n':
+            context['action'] = 'Pay advance'
+        elif context['order'].status == 'a':
+            context['action'] = 'Cancel'
+            
         return context
 
 
@@ -151,5 +158,5 @@ class UserOrderDeleteView(LoginRequiredMixin, DeleteView):
         if order.status == 'a':
             messages.success(self.request, 'Order paid in advanced')
         else:
-            messages.success(self.request, 'Order cancelled.')
+            messages.success(self.request, 'Order deleted')
         return super().form_valid(form)

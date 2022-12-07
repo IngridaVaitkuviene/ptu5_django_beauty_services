@@ -1,10 +1,16 @@
 {% extends 'beauty_services/base.html' %}
-{% block title %}{% if updating %}Paying{% else %}Creating New{% endif %} Order in {{ block.super }}{% endblock title %}
+{% block title %}{% if action %}{{ action }}{% else %}Creating New{% endif %} Order in {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>{% if updating %}Paying{% else %}Creating New{% endif %} Order</h1>
+<h1>{% if action %}{{ action }}{% else %}Creating New{% endif %} Order</h1>
 <form action="" method="post">
+    {% if order %}
+        <p>Order ID: {{ order.id }}</p>
+        <p>Order date: {{ order.date }}</p>
+        <p>Customer: {{ order.customer }}</p>
+        <p>Total sum: {{ order.total_sum }}</p>
+    {% endif %}
     {% csrf_token %}
     {{ form.as_p }}
-    <p><button type="submit">{% if updating %}Pay{% else %}Order{% endif %}</button></p>
+    <p><button type="submit">{% if action %}{{ action }}{% else %}Order{% endif %}</button></p>
 </form>
 {% endblock content %}

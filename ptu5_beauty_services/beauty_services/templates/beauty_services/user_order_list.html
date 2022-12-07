@@ -4,6 +4,7 @@
 <h1>My Orders</h1>
 <p><button><a href="{% url 'user_order_create' %}">Create New Order</a></button></p>
 <div class='table-grid my-orders-table'>
+    <div class='table-grid-cell center dark'>ID</div>
     <div class='table-grid-cell center dark'>Date</div>
     <div class='table-grid-cell center dark'>Total sum</div>
     <div class='table-grid-cell center dark'>Reserved date</div>
@@ -11,6 +12,7 @@
     <div class='table-grid-cell center dark'>Order details</div>
     <div class='table-grid-cell center dark'>Actions</div>
     {% for order in order_list %}
+        <div class='table-grid-cell center'>{{ order.id }}</div>
         <div class='table-grid-cell center'>{{ order.date }}</div>
         <div class='table-grid-cell center'>{{ order.total_sum }}</div>
         <div class='table-grid-cell center'>{{ order.reserved_date }}</div>
@@ -19,7 +21,9 @@
         <div class='table-grid-cell center'>
             {% if order.status == 'n' %}
                 <button><a href="{% url 'user_order_update' order.pk %}">Pay advance</a></button>
-                <button><a href="{% url 'user_order_delete' order.pk %}">Cancel</a></button>
+                <button><a href="{% url 'user_order_delete' order.pk %}">Delete</a></button>
+            {% elif order.status == 'a' %}
+                <button><a href="{% url 'user_order_update' order.pk %}">Cancel</a></button>
             {% endif %}
         </div>
     {% endfor %}
