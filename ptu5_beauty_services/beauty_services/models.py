@@ -118,10 +118,10 @@ class Order(models.Model):
         verbose_name_plural = _('Orders')
 
     def get_total(self):
-        total = 0
+        total_sum = 0
         for line in self.order_lines.all():
-            total += line.total_sum
-        return total
+            total_sum += line.total_sum
+        return total_sum
 
     def save(self, *args, **kwargs):
         if not self._state.adding:
@@ -155,6 +155,11 @@ class OrderLine(models.Model):
     @property
     def total_sum(self):
         return self.quantity * self.price
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.order.total_sum = self.order.get_total()
+        self.order.save()
 
     def __str__(self) -> str:
         return f"{self.salon_service}: {self.quantity} x {self.price}"
