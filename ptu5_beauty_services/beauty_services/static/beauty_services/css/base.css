@@ -83,7 +83,7 @@ form input {
 }
 
 .form-grid {
-    grid-template-columns: 12rem auto;
+    grid-template-columns: 10rem auto;
 }
 
 .form-grid input[type="text"] .form-grid input[type="email"] .form-grid input[type="password"] {
@@ -189,11 +189,11 @@ table {
 .table-grid {
     display: grid;
     padding: 0.5rem;
-    width: 70rem;
+    width: 60rem;
 }
 
 .my-orders-table {
-    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 0.25fr 0.25fr 0.50fr 0.5fr 0.25fr 0.5fr;
 }
 
 .my-order-details-table {

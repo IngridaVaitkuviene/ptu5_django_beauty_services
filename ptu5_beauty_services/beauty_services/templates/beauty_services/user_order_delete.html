@@ -1,0 +1,14 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}Cancel order in {{ block.super }} {% endblock title %}
+{% block content %}
+<h1>{% if object.status == 'a' %}Pay{% else %}Cancel{% endif %} Order</h1>
+<form method="post" action="">
+    {% csrf_token %}
+    <p>Are you sure you want to {% if object.status == 'a' %}pay {% else %}cancel order{% endif %}:
+        '{{ object.date }} {{ object.customer.user.first_name }} {{ object.customer.user.last_name }}' ?</p>
+    <p>
+        <button type="submit">Yes</button>
+        <button><a href="{% url 'user_orders' %}">No</a></button>
+    </p>
+</form>
+{% endblock content %}
