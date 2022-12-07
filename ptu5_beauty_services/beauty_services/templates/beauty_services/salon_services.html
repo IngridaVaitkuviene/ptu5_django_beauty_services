@@ -1,0 +1,26 @@
+{% extends 'beauty_services/base.html' %}
+{% load static %}
+{% block title %}{{ object.salon_name }} in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>{{ object.salon_name }} Services</h1>
+<div class='table-grid salon-services-table'>
+    <div class='table-grid-cell center dark'>Service Name</div>
+    <div class='table-grid-cell center dark'>Price</div>
+    {% for salon_service in service_list %}
+       <div class='table-grid-cell'>{{ salon_service.service_name }}</div>
+       <div class='table-grid-cell center'>{{ salon_service.price }} </div>  
+    {% endfor %}
+</div>
+<div class="paginator">
+    {% if page_obj.has_other_pages %}
+        {% for page_number in page_obj.paginator.page_range %}
+            {% if page_number == page_obj.number %}
+                <span>{{ page_number }}</span>
+            {% else %}
+                <a href="?{% if request.GET.salon_id %}salon_id={{ request.GET.salon_id }}&{% endif %}page={{ page_number }}">{{ page_number }}</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+<button class='back-button'><a href="{% url 'salon' object.pk %}">Back</a></button>
+{% endblock content %}

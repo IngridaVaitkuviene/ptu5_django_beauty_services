@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from . models import ServiceType, BeautySalon, Service, Order, OrderLine
+from . models import ServiceType, BeautySalon, Service, Order, SalonService
 
 def index(request):
     types =  ServiceType.objects.all()
@@ -34,6 +34,26 @@ def salons(request):
 class SalonDetailView(DetailView):
     model = BeautySalon
     template_name = 'beauty_services/salon_detail.html'
+
+
+class SalonServicesView(ListView):
+    model = Service
+    paginate_by = 10
+    template_name = 'beauty_services/salon_services.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        salon_id = self.request.GET.get('salon_id')
+        if salon_id:
+            context['object'] = get_object_or_404(BeautySalon, id=salon_id)
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        salon_id = self.request.GET.get('salon_id')
+        if salon_id:
+            queryset = queryset.filter(salons_services__beauty_salon=salon_id)
+        return queryset
 
 
 class ServiceListView(ListView):

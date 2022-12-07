@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ object.salon_name }} in {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>{{ object.salon_name }}</h>
+<h1>{{ object.salon_name }}</h1>
 <ul>
     {% if object.image %}
         <img src="{{ object.image.url }}" style='width: 20rem'>
@@ -20,4 +20,5 @@
         <p>{{ object.description|safe }}</p>   
     {% endif %}
 </ul>
+<ul><button class='services-button'><a href="{% url 'salon_services' %}?salon_id={{ object.id }}">Services</a></button></ul>
 {% endblock content %}

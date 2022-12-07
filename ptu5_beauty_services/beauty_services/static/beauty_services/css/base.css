@@ -83,8 +83,11 @@ form input {
 }
 
 .form-grid {
-    margin: 0.5rem;
-    grid-template-columns: 10rem auto;
+    grid-template-columns: 12rem auto;
+}
+
+.form-grid input[type="text"] .form-grid input[type="email"] .form-grid input[type="password"] {
+    width: 30%;
 }
 
 h1 {
@@ -200,6 +203,10 @@ table {
 .table-grid-cell {
     border-bottom: 1px solid #999;
     padding: 0.5rem;
+}
+
+.salon-services-table {
+    grid-template-columns: 0.6fr 0.1fr;
 }
 
 .center {
