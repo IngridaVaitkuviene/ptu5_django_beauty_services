@@ -72,6 +72,9 @@ class OrderLineAdmin(admin.ModelAdmin):
         'salon_service__service__service_name',
     )
 
+
+class SalonReviewAdmin(admin.ModelAdmin):
+    list_display = ('beauty_salon', 'customer', 'created_at',)
     
 admin.site.register(models.ServiceType)
 admin.site.register(models.BeautySalon, BeautySalonAdmin)
@@ -80,3 +83,4 @@ admin.site.register(models.SalonService, SalonServiceAdmin)
 admin.site.register(models.Customer, CustomerAdmin)
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.OrderLine, OrderLineAdmin)
+admin.site.register(models.SalonReview, SalonReviewAdmin)

@@ -11,6 +11,6 @@
     {% endif %}
     {% csrf_token %}
     {{ form.as_p }}
-    <p><button type="submit">{% if action %}{{ action }}{% else %}Order{% endif %}</button></p>
+    <p><button type="submit">{% if action %}{{ action }}{% else %}Create order{% endif %}</button></p>
 </form>
 {% endblock content %}

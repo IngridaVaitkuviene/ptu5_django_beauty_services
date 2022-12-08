@@ -163,3 +163,26 @@ class OrderLine(models.Model):
 
     def __str__(self) -> str:
         return f"{self.salon_service}: {self.quantity} x {self.price}"
+
+
+class SalonReview(models.Model):
+    beauty_salon = models.ForeignKey(
+        BeautySalon, 
+        verbose_name=_("beauty salon"), 
+        on_delete=models.CASCADE,
+        related_name='reviews',
+    )
+    customer = models.ForeignKey(
+        Customer, 
+        verbose_name=_("customer"), 
+        on_delete=models.CASCADE,
+        related_name='reviews',    
+    )
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    content = models.TextField(_("content"), max_length=1000)
+
+    def __str__(self) -> str:
+        return f"{self.customer} on {self.beauty_salon} at {self.created_at}"
+
+    class Meta:
+        ordering = ('-created_at',)
