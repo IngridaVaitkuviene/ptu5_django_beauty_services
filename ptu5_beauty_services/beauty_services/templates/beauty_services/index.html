@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}Beauty Salon Appoitments Online - {{ block.super }}{% endblock title %}
 {% block content %}
-<img src="{% static 'beauty_services/images/types.jpg' %}" style='width: 20rem'>
 <ul><a href="{% url 'salons' %}">Beauty salons:</a> {{ salon_count }}</ul>
 <ul><a href=" {% url 'services' %}">Services:</a> {{ service_count }}</ul>
 <ul>Visits in this session: {{ visits_count }}</ul>
