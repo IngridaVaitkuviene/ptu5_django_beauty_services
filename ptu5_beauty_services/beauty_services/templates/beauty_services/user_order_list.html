@@ -21,9 +21,7 @@
         <div class='table-grid-cell center'>
             {% if order.status == 'n' %}
                 <button><a href="{% url 'user_order_update' order.pk %}">Pay advance</a></button>
-                <button><a href="{% url 'user_order_delete' order.pk %}">Delete</a></button>
-            {% elif order.status == 'a' %}
-                <button><a href="{% url 'user_order_update' order.pk %}">Cancel</a></button>
+                <button><a href="{% url 'user_order_delete' order.pk %}">Cancel</a></button>
             {% endif %}
         </div>
     {% endfor %}
