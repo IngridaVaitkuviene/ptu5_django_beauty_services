@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +31,15 @@
                     <a href="{% url 'register' %}">Register</a>
                     <a href="{% url 'login' %}{% if request.path != 'accounts/logout/' %}?next={{ request.path }}{% endif %}">Login</a>
                 {% endif %}
+                <span>
+                    <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        {% for lang in LANGUAGES %}
+                            <button type="submit" name="language" value="{{ lang.0 }}">{{ lang.0|upper|slice:2 }}</button>
+                        {% endfor %}
+                    </form>
+                </span>
             {% endblock nav %}
         </div>
     </header>

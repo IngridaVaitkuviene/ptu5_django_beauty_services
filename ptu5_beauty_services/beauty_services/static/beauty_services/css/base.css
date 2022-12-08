@@ -237,3 +237,7 @@ table {
 .review-form label {
     display: none;
 }
+
+span button {
+    margin: 0;
+}
