@@ -15,7 +15,13 @@
 {% endif %}
 {% for review in object.reviews.all %}
     <div class="salon-review">
-        <p style='font-weight: bolder'>{{ review.created_at }} {{ review.customer.user.first_name }} {{ review.customer.user.last_name }}</p>
+        <p style='font-weight: bolder'>{{ review.created_at }} {{ review.customer.user.first_name }} {{ review.customer.user.last_name }} 
+            {% if review.customer.user.profile.photo %}
+                <img src="{{ review.customer.user.profile.photo.url }}">
+            {% else %}
+                <img src="{% static 'no_image.png' %}">
+            {% endif %}
+        </p>
         <p>{{ review.content }}</p>
     </div>
 {% endfor %}
