@@ -1,0 +1,24 @@
+{% extends 'beauty_services/base.html' %}
+{% load static %}
+{% block title %}{{ object.salon_name }} Reviews in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>{{ object.salon_name }} Reviews/Comments</h1>
+{% if user.is_authenticated %}
+    <div class="review-form">
+        <p>You can leave Your comment here:</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button type="submit">Comment</button></p>
+        </form>
+    </div>
+{% endif %}
+{% for review in object.reviews.all %}
+    <div class="salon-review">
+        <p style='font-weight: bolder'>{{ review.created_at }} {{ review.customer.user.first_name }} {{ review.customer.user.last_name }}</p>
+        <p>{{ review.content }}</p>
+    </div>
+{% endfor %}
+<div></div>
+<button class='back-button'><a href="{% url 'salon' object.pk %}">Back</a></button>
+{% endblock content %}

@@ -43,6 +43,7 @@ main {
     background-image: url('/static/index_body.webp');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 main p {
@@ -220,4 +221,14 @@ table {
 .back-button {
     margin: 0.5rem;
     width: 3rem;
+}
+
+.salon-review {
+    display: block;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.review-form label {
+    display: none;
 }

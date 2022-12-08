@@ -3,10 +3,11 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormMixin
 from . models import ServiceType, BeautySalon, Service, Order, OrderLine
-from . forms import UserOrderForm, UserOrderUpdateForm
+from . forms import SalonReviewForm, UserOrderForm, UserOrderUpdateForm, tomorrow
 
 def index(request):
     types =  ServiceType.objects.all()
@@ -59,6 +60,36 @@ class SalonServicesView(ListView):
         return queryset
 
 
+class SalonReviewView(FormMixin, DetailView):
+    model = BeautySalon
+    form_class = SalonReviewForm
+    paginate_by = 3
+    template_name = 'beauty_services/salon_review.html'
+
+    def get_success_url(self):
+        return reverse('salon_reviews', kwargs={'pk': self.get_object().id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_initial(self):
+        return {
+            'beauty_salon': self.get_object(),
+            'customer': self.request.user.customer,
+        }
+
+    def form_valid(self, form):
+        form.instance.beauty_salon = self.get_object()
+        form.instance.customer = self.request.user.customer
+        form.save()
+        messages.success(self.request, 'Your review/comment has been posted')
+        return super().form_valid(form)
+
 class ServiceListView(ListView):
     model = Service
     paginate_by = 15
@@ -94,42 +125,46 @@ class UserOrderListView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class UserOrderDetailView(LoginRequiredMixin, DetailView):
+class UserOrderDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Order
     template_name = 'beauty_services/user_order_detail.html'
+
+    def test_func(self):
+        return self.get_object().customer == self.request.user.customer
 
 
 class UserOrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
-    # fields = ('customer', 'reserved_date', )
     form_class = UserOrderForm
     template_name = 'beauty_services/user_order_form.html'
     success_url = reverse_lazy('user_orders')
 
     def form_valid(self, form):
-        form.instance.customer.user = self.request.user
+        form.instance.customer = self.request.user.customer
         form.instance.status = 'n'
         messages.success(self.request, "New order created.")
         return super().form_valid(form)
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['customer'] = self.request.user.customer
+        initial['reserved_date'] = tomorrow()
+        return initial
 
-class UserOrderUpdateView(LoginRequiredMixin, UpdateView):
+
+class UserOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Order
     form_class = UserOrderUpdateForm
     template_name = 'beauty_services/user_order_form.html'
     success_url = reverse_lazy('user_orders')
 
-    #NEVEIKIA?!!!
-    # def test_func(self):
-    #     order = self.get_object()
-    #     return self.request.user == order.customer
+    def test_func(self):
+        return self.get_object().customer == self.request.user.customer
 
     def form_valid(self, form):
         form.instance.customer.user = self.request.user
         form.instance.status = 'a'
         messages.success(self.request, "Order updated/Paid in advance")
-        form.instance.status = 'c'
-        messages.success(self.request, "Order canceled")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -137,21 +172,16 @@ class UserOrderUpdateView(LoginRequiredMixin, UpdateView):
         context['order'] = self.get_object()
         if context['order'].status == 'n':
             context['action'] = 'Pay advance'
-        elif context['order'].status == 'a':
-            context['action'] = 'Cancel'
-            
         return context
 
 
-class UserOrderDeleteView(LoginRequiredMixin, DeleteView):
+class UserOrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Order
     template_name = 'beauty_services/user_order_delete.html'
     success_url = reverse_lazy('user_orders')
 
-    #NEVEIKIA?!!!
-    # def test_func(self):
-    #     order = self.get_object()
-    #     return self.request.user == order.customer
+    def test_func(self):
+        return self.get_object().customer == self.request.user.customer
 
     def form_valid(self, form):
         order = self.get_object()
