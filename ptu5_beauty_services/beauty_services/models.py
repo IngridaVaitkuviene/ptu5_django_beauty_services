@@ -182,7 +182,7 @@ class SalonReview(models.Model):
     content = models.TextField(_("content"), max_length=1000)
 
     def __str__(self) -> str:
-        return f"{self.customer} on {self.beauty_salon} at {self.created_at}"
+        return f"{self.customer.user.first_name} {self.customer.user.last_name} on {self.beauty_salon} at {self.created_at}"
 
     class Meta:
         ordering = ('-created_at',)
