@@ -6,8 +6,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
-from . models import ServiceType, BeautySalon, Service, Order, OrderLine
-from . forms import SalonReviewForm, UserOrderForm, UserOrderUpdateForm, tomorrow
+from . models import ServiceType, BeautySalon, Service, SalonService, Order, OrderLine
+from . forms import SalonReviewForm, UserOrderForm, UserOrderDetailAddForm, UserOrderUpdateForm, tomorrow
 
 def index(request):
     types =  ServiceType.objects.all()
@@ -90,6 +90,7 @@ class SalonReviewView(FormMixin, DetailView):
         messages.success(self.request, 'Your review/comment has been posted')
         return super().form_valid(form)
 
+
 class ServiceListView(ListView):
     model = Service
     paginate_by = 15
@@ -150,6 +151,33 @@ class UserOrderCreateView(LoginRequiredMixin, CreateView):
         initial['customer'] = self.request.user.customer
         initial['reserved_date'] = tomorrow()
         return initial
+
+
+class UserOrderDetailCreateView(LoginRequiredMixin, CreateView):
+    model = Order
+    form_class = UserOrderDetailAddForm
+    template_name = 'beauty_services/user_order_detail_create.html'
+
+    def form_valid(self, form):
+        messages.success(self.request, "Details added")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('user_order', kwargs={'pk': self.get_object().id})
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['order'] = self.get_object()
+        initial['price'] = 0
+        return initial
+
+    def get_form(self, form_class=UserOrderDetailAddForm):
+        form = super().get_form(form_class)
+        order = self.get_object()
+        if order.order_lines.count() > 0:
+            salon = order.order_lines.first().salon_service.beauty_salon
+            form.fields['salon_service'].queryset = SalonService.objects.filter(beauty_salon=salon)
+        return form
 
 
 class UserOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

@@ -1,0 +1,10 @@
+{% extends 'beauty_services/base.html' %}
+{% block title %}Adding order details in {{ order_line.order }} - {{ block.super }} {% endblock title %}
+{% block content %}
+<h1>Adding Order Details</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><button type="submit">Add details</button></p>
+</form>
+{% endblock content %}

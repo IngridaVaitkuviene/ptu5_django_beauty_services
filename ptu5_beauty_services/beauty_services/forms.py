@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.timezone import datetime, timedelta
 from datetime import date
-from . models import Order, SalonReview
+from . models import Order, OrderLine, SalonReview
 
 def tomorrow():
     return date.today() + timedelta(days=1)
@@ -26,6 +26,19 @@ class UserOrderForm(forms.ModelForm):
         model = Order
         fields = ('customer', 'reserved_date',)
         widgets = {'customer': forms.HiddenInput()}
+
+
+class UserOrderDetailAddForm(forms.ModelForm):
+    class Meta:
+        model = OrderLine
+        fields = ('order', 'salon_service', 'price',)
+        widgets = {'order': forms.HiddenInput(), 'price': forms.HiddenInput()}
+
+    def clean(self):
+        cleaned_data = super().clean()
+        salon_service = cleaned_data['salon_service']
+        cleaned_data['price'] = salon_service.service.price
+        return cleaned_data
 
 
 class UserOrderUpdateForm(forms.ModelForm):
