@@ -3,10 +3,11 @@
 {% block content %}
 <h1>Order details</h1>
 {% if object.order_lines.count > 0 %}
-    <p>Salon: {{ object.order_lines.first.salon_service.beauty_salon.salon_name }},
-    Address: {{ object.order_lines.first.salon_service.beauty_salon.address }}
-    </p>
-
+    <p>Order ID: {{ object.order_lines.first.order.id }}</p>
+    <p>Date: {{ object.order_lines.first.order.date }}</p>
+    <p>Total sum: {{ object.order_lines.first.order.total_sum }}
+    <p>Reserved date: {{ object.order_lines.first.order.reserved_date }}</p>
+    <p>Salon: {{ object.order_lines.first.salon_service.beauty_salon }}</p>
 {% endif %}
 <div class='table-grid my-order-details-table'>
     <div class='table-grid-cell center dark'>Service</div>
