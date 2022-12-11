@@ -6,11 +6,9 @@
 <div class='table-grid salon-services-table'>
     <div class='table-grid-cell center dark'>Service Name</div>
     <div class='table-grid-cell center dark'>Price</div>
-    <div class='table-grid-cell center dark'></div>
     {% for salon_service in service_list %}
        <div class='table-grid-cell'>{{ salon_service.service_name }}</div>
        <div class='table-grid-cell center'>{{ salon_service.price }} </div>
-       <div class='table-grid-cell center'><button>Add to Order</button></div>
     {% endfor %}
 </div>
 <div class="paginator">

@@ -207,7 +207,7 @@ table {
 }
 
 .salon-services-table {
-    grid-template-columns: 0.6fr 0.1fr 0.1fr;
+    grid-template-columns: 0.6fr 0.1fr;
 }
 
 .center {
