@@ -194,7 +194,7 @@ table {
 }
 
 .my-orders-table {
-    grid-template-columns: 0.10fr 0.35fr 0.25fr 0.50fr 0.5fr 0.25fr 0.25fr 0.5fr;
+    grid-template-columns: 0.10fr 0.40fr 0.25fr 0.50fr 0.5fr 0.25fr 0.25fr 0.5fr;
 }
 
 .my-order-details-table {
