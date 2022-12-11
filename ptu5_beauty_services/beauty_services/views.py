@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from . models import ServiceType, BeautySalon, Service, SalonService, Order, OrderLine
@@ -87,7 +88,7 @@ class SalonReviewView(FormMixin, DetailView):
         form.instance.beauty_salon = self.get_object()
         form.instance.customer = self.request.user.customer
         form.save()
-        messages.success(self.request, 'Your review/comment has been posted')
+        messages.success(self.request, _("Your review/comment has been posted"))
         return super().form_valid(form)
 
 
@@ -143,7 +144,7 @@ class UserOrderCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.customer = self.request.user.customer
         form.instance.status = 'n'
-        messages.success(self.request, "New order created.")
+        messages.success(self.request, _("New order created"))
         return super().form_valid(form)
 
     def get_initial(self):
@@ -159,7 +160,7 @@ class UserOrderDetailCreateView(LoginRequiredMixin, CreateView):
     template_name = 'beauty_services/user_order_detail_create.html'
 
     def form_valid(self, form):
-        messages.success(self.request, "Details added")
+        messages.success(self.request, _("Details added"))
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -192,7 +193,7 @@ class UserOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.customer.user = self.request.user
         form.instance.status = 'a'
-        messages.success(self.request, "Order updated/Paid in advance")
+        messages.success(self.request, _("Order updated/Paid in advance"))
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -214,7 +215,7 @@ class UserOrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def form_valid(self, form):
         order = self.get_object()
         if order.status == 'a':
-            messages.success(self.request, 'Order paid in advanced')
+            messages.success(self.request, _("Order paid in advanced"))
         else:
-            messages.success(self.request, 'Order deleted')
+            messages.success(self.request, _("Order deleted"))
         return super().form_valid(form)

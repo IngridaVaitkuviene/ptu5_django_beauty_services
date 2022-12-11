@@ -1,8 +1,9 @@
 {% extends 'beauty_services/base.html' %}
 {% load static %}
-{% block title %}Beauty Salon Appoitments Online - {{ block.super }}{% endblock title %}
+{% load i18n %}
+{% block title %} {% trans "Beauty Salon Appoitments Online" %} - {{ block.super }}{% endblock title %}
 {% block content %}
-<ul><a href="{% url 'salons' %}">Beauty salons:</a> {{ salon_count }}</ul>
-<ul><a href=" {% url 'services' %}">Services:</a> {{ service_count }}</ul>
-<ul>Visits in this session: {{ visits_count }}</ul>
+<ul><a href="{% url 'salons' %}">{% trans "Beauty salons:" %}</a> {{ salon_count }}</ul>
+<ul><a href=" {% url 'services' %}">{% trans "Services:" %}</a> {{ service_count }}</ul>
+<ul>{% trans "Visits in this session: " %} {{ visits_count }}</ul>
 {% endblock content %}

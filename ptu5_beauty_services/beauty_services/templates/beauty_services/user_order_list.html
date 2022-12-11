@@ -1,17 +1,18 @@
 {% extends 'beauty_services/base.html' %}
-{% block title %}My Orders in {{ block.super }}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "My Orders in" %} {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>My Orders</h1>
-<p><button><a href="{% url 'user_order_create' %}">Create new order</a></button></p>
+<h1>{% trans "My Orders" %}</h1>
+<p><button><a href="{% url 'user_order_create' %}">{% trans "Create new order" %}</a></button></p>
 <div class='table-grid my-orders-table'>
-    <div class='table-grid-cell center dark'>ID</div>
-    <div class='table-grid-cell center dark'>Date</div>
-    <div class='table-grid-cell center dark'>Total sum</div>
-    <div class='table-grid-cell center dark'>Reserved date</div>
-    <div class='table-grid-cell center dark'>Status</div>
+    <div class='table-grid-cell center dark'>{% trans "ID" %}</div>
+    <div class='table-grid-cell center dark'>{% trans "Date" %}</div>
+    <div class='table-grid-cell center dark'>{% trans "Total sum" %}</div>
+    <div class='table-grid-cell center dark'>{% trans "Reserved date" %}</div>
+    <div class='table-grid-cell center dark'>{% trans "Status" %}</div>
     <div class='table-grid-cell center dark'></div>
-    <div class='table-grid-cell center dark'>Order details</div>
-    <div class='table-grid-cell center dark'>Actions</div>
+    <div class='table-grid-cell center dark'>{% trans "Order details" %}</div>
+    <div class='table-grid-cell center dark'>{% trans "Actions" %}</div>
     {% for order in order_list %}
         <div class='table-grid-cell center'>{{ order.id }}</div>
         <div class='table-grid-cell center'>{{ order.date }}</div>
@@ -19,17 +20,17 @@
         <div class='table-grid-cell center'>{{ order.reserved_date }}</div>
         <div class='table-grid-cell center'>{{ order.get_status_display }}</div>
             {% if order.status == 'n' %}
-                <div class='table-grid-cell center'><button><a href="{% url 'user_order_details_add' order.pk %}">Add details</a></button></div>
+                <div class='table-grid-cell center'><button><a href="{% url 'user_order_details_add' order.pk %}">{% trans "Add details" %}</a></button></div>
             {% else %}
                 <div class='table-grid-cell center'>-</div>
             {% endif %}
-        <div class='table-grid-cell center'><button><a href="{% url 'user_order' order.pk %}">Details</a></button></div>
+        <div class='table-grid-cell center'><button><a href="{% url 'user_order' order.pk %}">{% trans "Details" %}</a></button></div>
         <div class='table-grid-cell center'>
             {% if order.status == 'n' %}
                 {% if order.total_sum > 0 %}
-                    <button><a href="{% url 'user_order_update' order.pk %}">Pay advance</a></button>
+                    <button><a href="{% url 'user_order_update' order.pk %}">{% trans "Pay advance" %}</a></button>
                 {% endif %}
-                <button><a href="{% url 'user_order_delete' order.pk %}">Cancel</a></button>
+                <button><a href="{% url 'user_order_delete' order.pk %}">{% trans "Cancel" %}</a></button>
             {% endif %}
         </div>
     {% endfor %}

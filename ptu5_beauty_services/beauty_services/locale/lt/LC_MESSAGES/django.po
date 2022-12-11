@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-08 15:26+0200\n"
+"POT-Creation-Date: 2022-12-12 01:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
 "11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
 "1 : n % 1 != 0 ? 2: 3);\n"
+
 #: .\beauty_services\models.py:11 .\beauty_services\models.py:25
 #: .\beauty_services\models.py:46
 msgid "name"
-msgstr ""
+msgstr "pavadinimas"
 
 #: .\beauty_services\models.py:11
 msgid "Enter the name of service type"
@@ -38,132 +39,266 @@ msgstr "adresas"
 
 #: .\beauty_services\models.py:27
 msgid "image"
-msgstr ""
+msgstr "nuotrauka"
 
 #: .\beauty_services\models.py:28
 msgid "description"
-msgstr ""
+msgstr "aprašymas"
 
 #: .\beauty_services\models.py:31
 msgid "Beauty salon"
-msgstr ""
+msgstr "Grožio salonas"
 
 #: .\beauty_services\models.py:32
 msgid "Beauty salons"
-msgstr ""
+msgstr "Grožio salonai"
 
 #: .\beauty_services\models.py:42
 msgid "service type"
-msgstr ""
+msgstr "paslaugų tipas"
 
 #: .\beauty_services\models.py:47 .\beauty_services\models.py:148
 msgid "price"
-msgstr ""
+msgstr "kaina"
 
 #: .\beauty_services\models.py:50
 msgid "Service"
-msgstr ""
+msgstr "paslauga"
 
 #: .\beauty_services\models.py:51
+#: .\beauty_services\templates\beauty_services\base.html:21
 msgid "Services"
-msgstr ""
+msgstr "Paslaugos"
 
 #: .\beauty_services\models.py:61 .\beauty_services\models.py:171
 msgid "beauty salon"
-msgstr ""
+msgstr "grožio salonas"
 
 #: .\beauty_services\models.py:67
 msgid "service"
-msgstr ""
+msgstr "paslauga"
 
 #: .\beauty_services\models.py:80
 msgid "phone number"
-msgstr ""
+msgstr "telefono numeris"
 
 #: .\beauty_services\models.py:83
 msgid "user"
-msgstr ""
+msgstr "vartotojas"
 
 #: .\beauty_services\models.py:89
 msgid "Customer"
-msgstr ""
+msgstr "klientas"
 
 #: .\beauty_services\models.py:90
 msgid "Customers"
-msgstr ""
+msgstr "klientai"
 
 #: .\beauty_services\models.py:99
 msgid "new"
-msgstr ""
+msgstr "naujas"
 
 #: .\beauty_services\models.py:100
 msgid "advance payment taken"
-msgstr ""
+msgstr "sumokėtas avansas"
 
 #: .\beauty_services\models.py:101
 msgid "cancelled"
-msgstr ""
+msgstr "atšaukta"
 
 #: .\beauty_services\models.py:102
 msgid "paid"
-msgstr ""
+msgstr "sumokėta"
 
 #: .\beauty_services\models.py:103
 msgid "done"
-msgstr ""
+msgstr "užbaigta"
 
 #: .\beauty_services\models.py:105
 msgid "order date"
-msgstr ""
+msgstr "užsakymo data"
 
 #: .\beauty_services\models.py:108 .\beauty_services\models.py:177
 msgid "customer"
-msgstr ""
+msgstr "klientas"
 
 #: .\beauty_services\models.py:112
 msgid "total sum"
-msgstr ""
+msgstr "suma iš viso"
 
 #: .\beauty_services\models.py:113
 msgid "reserved date"
-msgstr ""
+msgstr "rezervuota data"
 
 #: .\beauty_services\models.py:114
 msgid "status"
-msgstr ""
+msgstr "statusas"
 
 #: .\beauty_services\models.py:117
 msgid "Order"
-msgstr ""
+msgstr "užsakymas"
 
 #: .\beauty_services\models.py:118
 msgid "Orders"
-msgstr ""
+msgstr "užsakymai"
 
 #: .\beauty_services\models.py:138
 msgid "salon service"
-msgstr ""
+msgstr "grožio salono paslaugos"
 
 #: .\beauty_services\models.py:144
 msgid "order"
-msgstr ""
+msgstr "užsakymas"
 
 #: .\beauty_services\models.py:149
 msgid "quantity"
-msgstr ""
+msgstr "kiekis"
 
 #: .\beauty_services\models.py:152
 msgid "Order line"
-msgstr ""
+msgstr "užsakymo eilutė"
 
 #: .\beauty_services\models.py:153
 msgid "Order lines"
-msgstr ""
+msgstr "užsakymo eilutės"
 
 #: .\beauty_services\models.py:181
 msgid "created at"
-msgstr ""
+msgstr "sukurta"
 
 #: .\beauty_services\models.py:182
 msgid "content"
-msgstr ""
+msgstr "turinys"
+
+#: .\beauty_services\templates\beauty_services\base.html:11
+msgid "Beauty Services"
+msgstr "Grožio Paslaugos"
+
+#: .\beauty_services\templates\beauty_services\base.html:16
+msgid "Beauty services"
+msgstr "Grožio paslaugos"
+
+#: .\beauty_services\templates\beauty_services\base.html:19
+msgid "Home"
+msgstr "Pagrindinis"
+
+#: .\beauty_services\templates\beauty_services\base.html:20
+msgid "Salons"
+msgstr "Grožio salonai"
+
+#: .\beauty_services\templates\beauty_services\base.html:25
+#: .\beauty_services\templates\beauty_services\user_order_list.html:5
+msgid "My Orders"
+msgstr "Mano užsakymai"
+
+#: .\beauty_services\templates\beauty_services\base.html:27
+msgid "Admin"
+msgstr "Admin aplinka"
+
+#: .\beauty_services\templates\beauty_services\base.html:29
+msgid "Logout"
+msgstr "Atsijungti"
+
+#: .\beauty_services\templates\beauty_services\base.html:31
+msgid "Register"
+msgstr "Užsiregistruoti"
+
+#: .\beauty_services\templates\beauty_services\base.html:32
+msgid "Login"
+msgstr "Prisijungti"
+
+#: .\beauty_services\templates\beauty_services\base.html:60
+msgid "All rights reserved. Beauty Services LT"
+msgstr "Visos teisės saugomos Grožio Paslaugos LT"
+
+#: .\beauty_services\templates\beauty_services\index.html:4
+msgid "Beauty Salon Appoitments Online"
+msgstr "Grožio salonų paslaugos internetu"
+
+#: .\beauty_services\templates\beauty_services\index.html:6
+msgid "Beauty salons:"
+msgstr "Grožio salonai:"
+
+#: .\beauty_services\templates\beauty_services\index.html:7
+msgid "Services:"
+msgstr "Paslaugos:"
+
+#: .\beauty_services\templates\beauty_services\index.html:8
+msgid "Visits in this session: "
+msgstr "Per šią sesiją apsilankyta kartų:"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:3
+msgid "My Orders in"
+msgstr "Mano užsakymai"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:6
+msgid "Create new order"
+msgstr "Sukurti naują užsakymą"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:8
+msgid "ID"
+msgstr "Nr."
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:9
+msgid "Date"
+msgstr "Data"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:10
+msgid "Total sum"
+msgstr "Suma iš viso"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:11
+msgid "Reserved date"
+msgstr "Rezervuota data"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:12
+msgid "Status"
+msgstr "Statusas"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:14
+msgid "Order details"
+msgstr "Užsakymo detalės"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:15
+msgid "Actions"
+msgstr "Veiksmai"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:23
+msgid "Add details"
+msgstr "Pridėti paslaugas"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:27
+msgid "Details"
+msgstr "Paslaugos"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:31
+msgid "Pay advance"
+msgstr "Sumokėti avansą"
+
+#: .\beauty_services\templates\beauty_services\user_order_list.html:33
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: .\beauty_services\views.py:91
+msgid "Your review/comment has been posted"
+msgstr "Jūsų komentaras paskelbtas"
+
+#: .\beauty_services\views.py:147
+msgid "New order created"
+msgstr "Naujas užsakymas sukurtas"
+
+#: .\beauty_services\views.py:163
+msgid "Details added"
+msgstr "Paslauga (-os) pridėta (-os) prie užsakymo"
+
+#: .\beauty_services\views.py:196
+msgid "Order updated/Paid in advance"
+msgstr "Užsakymas atnaujintas - sumokėtas avansas"
+
+#: .\beauty_services\views.py:218
+msgid "Order paid in advanced"
+msgstr "Apmokėtas avansas"
+
+#: .\beauty_services\views.py:220
+msgid "Order deleted"
+msgstr "Užsakymas atšauktas ir ištrintas"
