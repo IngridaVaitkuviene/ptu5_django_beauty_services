@@ -1,4 +1,5 @@
 {% extends 'beauty_services/base.html' %}
+{% load static %}
 {% block title %}{{ block.super }} {{ user }} profile{% endblock title %}
 {% block content %}
 <h1>{{ user }} profile</h1>
@@ -6,6 +7,10 @@
     {% if user.profile and user.profile.photo %}
         <div>
             <img src="{{ user.profile.photo.url}}" class="user-profile-photo">
+        </div>
+    {% else %}
+        <div>
+            <img src="{% static 'beauty_services/no_image.jpg' %}" class="user-profile-photo">
         </div>
     {% endif %}
     <div class="spacer">
