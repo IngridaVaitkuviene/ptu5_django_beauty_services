@@ -22,4 +22,5 @@
 </ul>
 <ul><button class='services-button'><a href="{% url 'salon_services' %}?salon_id={{ object.id }}">Services</a></button></ul>
 <ul><button class='services-button'><a href="{% url 'salon_reviews' object.pk %}">Reviews/Comments</a></button></ul>
+<ul><button class='services-button'><a href="{% url 'salons' %}">Back</a></button></ul>
 {% endblock content %}
